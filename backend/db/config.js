@@ -1,4 +1,4 @@
-// import dotenv from 'dotenv';
+// import dotenv from 'dotenv';            //  dotenv is a package that reads the .env file.
 // dotenv.config();
 // import mysql from 'mysql2/promise';
 
@@ -39,7 +39,8 @@ export const db = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER,
   password: process.env.DB_PASS || "",
-  database: process.env.DB_NAME || "forum",
+  database: process.env.DB_NAME || "evangadi_forum_db",
+   port: process.env.DB_PORT || 3307,
 });
 
 const ensureParams = params => {
