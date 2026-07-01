@@ -47,7 +47,7 @@ export default function Auth() {
       setError('Email is required.');
       return;
     }
-
+  
     if (!emailPattern.test(normalizedEmail)) {
       setError('Please enter a valid email address.');
       return;
