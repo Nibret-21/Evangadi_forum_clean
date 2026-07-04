@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { PenSquare, ListTodo, LibraryBig } from "lucide-react";
 import {
@@ -132,7 +136,7 @@ export default function Dashboard() {
           </div>
 
           <div className={styles.searchColumn}>
-            <form className={styles.searchForm} onSubmit={handleSearch}>
+            {/* <form className={styles.searchForm} onSubmit={handleSearch}>
               <input
                 type="text"
                 value={searchInput}
@@ -142,31 +146,12 @@ export default function Dashboard() {
               <button type="submit" className={styles.searchButton}>
                 Search
               </button>
-            </form>
+            </form> */}
 
             <div className={styles.searchMode}>
-              <button
-                type="button"
-                className={
-                  searchMode === "keyword"
-                    ? styles.modeActive
-                    : styles.modeButton
-                }
-                onClick={() => setSearchMode("keyword")}
-              >
-                Keyword
-              </button>
-              <button
-                type="button"
-                className={
-                  searchMode === "semantic"
-                    ? styles.modeActive
-                    : styles.modeButton
-                }
-                onClick={() => setSearchMode("semantic")}
-              >
-                Semantic
-              </button>
+             
+              
+              
             </div>
           </div>
         </div>
