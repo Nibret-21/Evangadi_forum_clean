@@ -88,7 +88,7 @@ export default function QuestionDetail() {
     }
   };
   //lod quuestion
-  const loadQuestion = async () => {
+ loadQuestion = async () => {
     // increment request id for cancellation guard
     requestIdRef.current += 1;
     const localRequestId = requestIdRef.current;
@@ -117,6 +117,7 @@ export default function QuestionDetail() {
       const answersFromResult =
         result?.answers ||
         result?.data?.answers ||
+   
         result?.data?.data?.answers ||
         [];
 

@@ -24,7 +24,7 @@ export default function RagDocuments() {
   const [answerLoading, setAnswerLoading] = useState(false);
   const [answerError, setAnswerError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]); 
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState("");
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -35,18 +35,18 @@ export default function RagDocuments() {
   const fileInputRef = useRef(null);
 
   const selectedDocument = useMemo(
-    () =>
-      documents.find((doc) => String(doc.document_id) === String(selectedId)),
-    [documents, selectedId],
-  );
+    () =>                           // 0               ==         // false 
+      documents.find((doc) => String(doc.document_id) === String(selectedId)),  //  calculateSomething()
+    [documents, selectedId],    // [dependencies]   [thingsThatCanChange]
+  );  // all PDFs , // chosen PDF ID
 
   const loadDocuments = async (preferredId = null) => {
     setLoading(true);
     setGlobalMessage("");
     try {
-      const result = await listDocuments();
+      const result = await listDocuments();   ///    Call a function that talks to the backend and wait for the response    Give me all PDFs from server
       const list = result.data || [];
-      setDocuments(list);
+      setDocuments(list);      ///   Save documents
       if (preferredId) {
         setSelectedId(String(preferredId));
       } else if (!selectedId && list.length > 0) {
@@ -316,7 +316,7 @@ export default function RagDocuments() {
                   {formatBytes(selectedFile.size)}
                 </span>
               </div>
-            ) : (
+            ) : (      //  ternary 
               <p className={styles.noFile}>No file selected.</p>
             )}
 
