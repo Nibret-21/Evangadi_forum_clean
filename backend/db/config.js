@@ -38,11 +38,13 @@ import mysql from 'mysql2/promise';
 export const db = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER,
-  password: process.env.DB_PASS || "",
-  database: process.env.DB_NAME || "evangadi_forum_db",
-   port: process.env.DB_PORT || 3307,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE || "evangadi_forum_db",
+  port: process.env.DB_PORT || 4000,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-
 const ensureParams = params => {
   if (params === undefined || params === null) {
     throw new Error('SQL parameters are required');
