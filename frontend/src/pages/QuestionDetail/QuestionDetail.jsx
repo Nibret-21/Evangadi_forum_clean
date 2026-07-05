@@ -1,14 +1,24 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { isAuthoredByUser } from "../../lib/utils";
 =======
+=======
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 import {isAuthoredByUser} from "../../lib/utils";
+<<<<<<< HEAD
 >>>>>>> Fe24
+=======
+import { useEffect, useState, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { isAuthoredByUser } from "../../lib/utils";
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
 import {
   getQuestion,
   getSimilarQuestions,
@@ -21,6 +31,11 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 export default function QuestionDetail() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  const {questionHash} = useParams();
+  const {user} = useAuth();
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
   //
   //   const [data, setData] = useState({
   //   question: null,
@@ -36,10 +51,13 @@ export default function QuestionDetail() {
   //state partitioning
   const { questionHash } = useParams();
   const { user } = useAuth();
+<<<<<<< HEAD
 =======
   const {questionHash} = useParams();
   const {user} = useAuth();
 >>>>>>> Fe24
+=======
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
 
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -111,6 +129,12 @@ export default function QuestionDetail() {
       setLoading(true);
       setMessage("");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      const result = await getQuestion(questionHash);
+      setQuestion(result.question || result.data?.question);
+      setAnswers(result.answers || result.data?.answers || []);
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
       setQuestion(null);
       setAnswers([]);
       setRelatedQuestions([]);
@@ -154,11 +178,14 @@ export default function QuestionDetail() {
       }
 
       // Load related questions but ignore if a newer request started
+<<<<<<< HEAD
 =======
       const result = await getQuestion(questionHash);
       setQuestion(result.question || result.data?.question);
       setAnswers(result.answers || result.data?.answers || []);
 >>>>>>> Fe24
+=======
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
       await loadRelatedQuestions();
       if (localRequestId !== requestIdRef.current) return;
 
@@ -377,6 +404,7 @@ export default function QuestionDetail() {
                     </div>
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 </div>
 
                 <div className={styles.answerText}>
@@ -388,6 +416,8 @@ export default function QuestionDetail() {
             ))}
           </div>
 =======
+=======
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
                   <p className={styles.answerText}>{answer.content}</p>
                   <button
                     onClick={() => speak(answer.content)}
@@ -419,7 +449,20 @@ export default function QuestionDetail() {
               🔊 Read All Answers
             </button>
           </>
+<<<<<<< HEAD
 >>>>>>> Fe24
+=======
+                </div>
+
+                <div className={styles.answerText}>
+                  <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                    {answer.content || ""}
+                  </ReactMarkdown>
+                </div>
+              </article>
+            ))}
+          </div>
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
         )}
 
         <form className={styles.answerForm} onSubmit={handleSubmitAnswer}>
@@ -492,6 +535,19 @@ export default function QuestionDetail() {
           </div>
         ) : (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+          relatedQuestions.map((related) => (
+            <Link
+              key={related.questionHash || related.id}
+              to={`/questions/${related.questionHash}`}
+              className={styles.relatedCard}
+            >
+              <h4>{related.title}</h4>
+              <p>{related.content?.slice(0, 60) || "View details"}</p>
+            </Link>
+          ))
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
           relatedQuestions.map((related) => {
             const target = related?.questionHash || related?.id;
 
@@ -519,6 +575,7 @@ export default function QuestionDetail() {
               </Link>
             );
           })
+<<<<<<< HEAD
 =======
           relatedQuestions.map((related) => (
             <Link
@@ -531,6 +588,8 @@ export default function QuestionDetail() {
             </Link>
           ))
 >>>>>>> Fe24
+=======
+>>>>>>> 1ecd3ef8e24d60a79b780d3188d45b9441d57af2
         )}
       </aside>
     </section>

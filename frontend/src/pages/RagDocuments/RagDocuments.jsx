@@ -34,7 +34,7 @@ import {
 } from "../../services/rag/rag.service.js";
 
 export default function RagDocuments() {
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
   const [documents, setDocuments] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [globalMessage, setGlobalMessage] = useState("");
@@ -56,7 +56,7 @@ export default function RagDocuments() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confirmTarget, setConfirmTarget] = useState(null);
   const fileInputRef = useRef(null);
-=======
+=========
   // Global error boundary – prevents blank page
   try {
     const [documents, setDocuments] = useState([]);
@@ -78,18 +78,31 @@ export default function RagDocuments() {
     const [previewLoading, setPreviewLoading] = useState(false);
     const [previewError, setPreviewError] = useState("");
     const fileInputRef = useRef(null);
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
 
-    const selectedDocument = useMemo(
-      () =>
-        documents.find((doc) => String(doc.document_id) === String(selectedId)),
-      [documents, selectedId],
-    );
+  const selectedDocument = useMemo(
+    () =>
+      documents.find((doc) => String(doc.document_id) === String(selectedId)),
+    [documents, selectedId],
+  );
 
-    // Auto‑speak AI answer
-    useEffect(() => {
-      if (answer) {
-        speak(answer);
+  const loadDocuments = async (preferredId = null) => {
+    setLoading(true);
+    setGlobalMessage("");
+    try {
+      const result = await listDocuments();
+      const list = result.data || [];
+      setDocuments(list);
+      if (preferredId) {
+        setSelectedId(String(preferredId));
+      } else if (!selectedId && list.length > 0) {
+        setSelectedId(String(list[0].document_id));
+      } else if (
+        list.length > 0 &&
+        selectedId &&
+        !list.some((doc) => String(doc.document_id) === String(selectedId))
+      ) {
+        setSelectedId(String(list[0].document_id));
       }
     }, [answer]);
 
@@ -191,7 +204,7 @@ export default function RagDocuments() {
       setPreviewError("");
     };
 
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
   // Central confirm modal flow
   const openConfirm = (doc, e) => {
     e.stopPropagation();
@@ -213,7 +226,7 @@ export default function RagDocuments() {
       await deleteDocument(confirmTarget.id);
       if (String(confirmTarget.id) === String(selectedId)) {
         setSelectedId(null);
-=======
+=========
     const handleFileChange = (event) => {
       const file = event.target.files?.[0];
       if (file) setSelectedFile(file);
@@ -230,7 +243,7 @@ export default function RagDocuments() {
         const newDoc = result.data;
         setSelectedFile(null);
         await loadDocuments(newDoc?.document_id);
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
         setAnswer("");
         setSearchResults([]);
         setSearchQuery("");
@@ -243,7 +256,7 @@ export default function RagDocuments() {
       } finally {
         setUploading(false);
       }
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
       setConfirmOpen(false);
       setConfirmTarget(null);
       await loadDocuments();
@@ -252,14 +265,14 @@ export default function RagDocuments() {
         error.response?.data?.message ||
           error.message ||
           "Failed to delete document.",
-=======
+=========
     };
 
     const handleDelete = async (doc, e) => {
       e.stopPropagation();
       const confirmed = window.confirm(
         `Delete "${doc.title}"? This cannot be undone.`,
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
       );
       if (!confirmed) return;
       try {
@@ -338,6 +351,98 @@ export default function RagDocuments() {
       if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
       return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
     };
+            {uploadError && <p className={styles.inlineError}>{uploadError}</p>}
+          </div>
+
+          {/* Document list */}
+          <div className={styles.docList}>
+            {loading ? (
+              <p className={styles.statusText}>Loading your library...</p>
+            ) : documents.length === 0 ? (
+              <p className={styles.statusText}>
+                Your library is empty. Upload a PDF to index it for search and
+                Q&A.
+              </p>
+            ) : (
+              documents.map((doc) => {
+                const isSelected =
+                  String(doc.document_id) === String(selectedId);
+                const isReady = doc.status === "ready";
+                return (
+                  <button
+                    type="button"
+                    key={doc.document_id}
+                    className={`${styles.docItem} ${
+                      isSelected ? styles.docItemActive : ""
+                    }`}
+                    onClick={() => handleSelectDocument(doc.document_id)}
+                  >
+                    <div className={styles.docItemLeft}>
+                      <span className={styles.docName}>{doc.title}</span>
+                      <span
+                        className={`${styles.badge} ${
+                          isReady ? styles.badgeReady : styles.badgeProcessing
+                        }`}
+                      >
+                        {isReady ? "READY" : "PROCESSING"}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      className={styles.deleteBtn}
+                      title="Delete document"
+                      onClick={(e) => openConfirm(doc, e)}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </button>
+                );
+              })
+            )}
+          </div>
+        </aside>
+
+        {/* ── Right panel ── */}
+        <section className={styles.panel}>
+          {!selectedDocument ? (
+            <div className={styles.emptyPanel}>
+              <p>
+                Choose a document from the library to open the reader, run
+                semantic search over its text, and ask questions with
+                AI-assisted answers grounded in that file.
+              </p>
+            </div>
+          ) : selectedDocument.status !== "ready" ? (
+            <div className={styles.emptyPanel}>
+              <p>
+                This document is not ready for preview or AI tools. Current
+                status: <strong>{selectedDocument.status}</strong>.
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Reader */}
+              <div className={styles.section}>
+                <h2 className={styles.sectionTitle}>Reader</h2>
+                <p className={styles.sectionDesc}>
+                  Inline preview of the selected PDF.
+                </p>
+                <div className={styles.readerBox}>
+                  {previewLoading ? (
+                    <p className={styles.previewStatus}>
+                      Loading document preview...
+                    </p>
+                  ) : previewError ? (
+                    <p className={styles.inlineError}>{previewError}</p>
+                  ) : previewUrl ? (
+                    <iframe
+                      title="PDF preview"
+                      src={previewUrl}
+                      className={styles.iframe}
+                    />
+                  ) : null}
+                </div>
+              </div>
 
     // ─── Render ─────────────────────────────────────────────────
     return (
@@ -434,17 +539,17 @@ export default function RagDocuments() {
                   return (
                     <button
                       type="button"
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
                       className={styles.deleteBtn}
                       title="Delete document"
                       onClick={(e) => openConfirm(doc, e)}
-=======
+=========
                       key={doc.document_id}
                       className={`${styles.docItem} ${
                         isSelected ? styles.docItemActive : ""
                       }`}
                       onClick={() => handleSelectDocument(doc.document_id)}
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
                     >
                       <div className={styles.docItemLeft}>
                         <span className={styles.docName}>{doc.title}</span>
@@ -638,7 +743,7 @@ export default function RagDocuments() {
           </section>
         </div>
       </div>
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 
       {confirmOpen && (
         <div
@@ -690,7 +795,7 @@ export default function RagDocuments() {
       )}
     </div>
   );
-=======
+=========
     );
   } catch (error) {
     console.error("RagDocuments render error:", error);
@@ -714,7 +819,7 @@ export default function RagDocuments() {
       </div>
     );
   }
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
 }
 
 // import {speak} from "../../accessibility/textToSpeech";

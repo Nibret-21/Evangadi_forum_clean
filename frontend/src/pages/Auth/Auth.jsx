@@ -198,7 +198,7 @@ export default function Auth() {
           email: normalizedEmail,
           password,
         });
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
         //########################## the fifth comment
         // setSuccessMessage('Registration successful! Please log in.');
         // // Clear form fields
@@ -213,25 +213,25 @@ export default function Auth() {
         // }, 1500);
         setSuccessMessage("Registration successful. Redirecting...");
 
-=======
+=========
         setSuccessMessage("Registration successful! Please log in.");
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
         setFirstName("");
         setLastName("");
         setEmail("");
         setPassword("");
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
         setShowPassword(false);
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         navigate("/dashboard", { replace: true });
-=======
+=========
         setTimeout(() => {
           setIsLogin(true);
           setSuccessMessage(null);
         }, 1500);
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
       }
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");

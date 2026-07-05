@@ -45,7 +45,7 @@ export function AuthProvider({children}) {
    * Registers a new user. Does not automatically log them in.
    * @param {Object} userData - { firstName, lastName, email, password }
    */
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 //######################### the fourth comment
   // const register = async (userData) => {
   //   setLoading(true);
@@ -64,7 +64,7 @@ export function AuthProvider({children}) {
   // };
 const register = async (userData) => {
   setLoading(true);
-=======
+=========
   const register = async (userData) => {
     setLoading(true);
     try {
@@ -80,7 +80,7 @@ const register = async (userData) => {
       setLoading(false);
     }
   };
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
 
   try {
     const { user } = await authService.register(userData);

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { PenSquare, ListTodo, LibraryBig } from "lucide-react";
-=======
+=========
 import {useEffect, useMemo, useState} from "react";
 /**react hooks/fetch data url chags/statics , computing,avoid recalculat evry 561 render/holde component,questin,search input*/
 import {Link, useSearchParams} from "react-router-dom";
@@ -16,7 +16,7 @@ import {useAuth} from "../../contexts/AuthContext";
 /**custom hook access auth context,provides user state and personaliz greeting */
 import {PenSquare, ListTodo, LibraryBig} from "lucide-react";
 /**icons for new question, your topics, knowledge base */
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
 import {
   getQuestions,
   searchQuestionsSemantic,
@@ -172,7 +172,7 @@ export default function Dashboard() {
               <button type="submit" className={styles.searchButton}>
                 Search
               </button>
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
             </form> */}
 
             <div className={styles.searchMode}>
@@ -180,7 +180,7 @@ export default function Dashboard() {
               
               
             </div>
-=======
+=========
             </form>
            {/**search input searchinput state,handel submit button */} 
             {/* <div className={styles.searchMode}>
@@ -207,7 +207,7 @@ export default function Dashboard() {
                 Semantic
               </button>
             </div> */}
->>>>>>> Fe24
+>>>>>>>>> Temporary merge branch 2
           </div>
         </div>
  {/**keyword,semantic button handleler on click updat or swich surchMode stat, current url not change till"submit button triger*/}
