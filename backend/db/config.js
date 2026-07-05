@@ -5,11 +5,14 @@ import mysql from "mysql2/promise";
 
 // Database connection pool
 export const db = mysql.createPool({
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE || "evangadi_forum_db",
+  port: process.env.DB_PORT || 4000,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 const ensureParams = (params) => {
@@ -204,7 +207,7 @@ export const safeExecute = async (sql, params) => {
 // dotenv.config();
 // import mysql from 'mysql2/promise';
 
-// // Database connection pool
+// Database connection pool
 // export const db = mysql.createPool({
 //   host: process.env.DB_HOST || "localhost",
 //   user: process.env.DB_USER,
