@@ -57,4 +57,4 @@ export const safeExecute = async (query, params = []) => {
     throw err;
   }
 };
-export default pool;
+// export default pool;
