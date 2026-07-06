@@ -48,5 +48,13 @@ const pool = mysql.createPool({
     rejectUnauthorized: false,
   },
 });
-
+export const safeExecute = async (query, params = []) => {
+  try {
+    const [result] = await pool.query(query, params);
+    return result;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
 export default pool;
