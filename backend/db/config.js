@@ -3,6 +3,10 @@ dotenv.config();
 
 import mysql from "mysql2/promise";
 
+console.log("DB_HOST:", process.env.DB_HOST);
+console.log("DB_PORT:", process.env.DB_PORT);
+console.log("DB_USER:", process.env.DB_USER);
+
 export const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -12,39 +16,7 @@ export const db = mysql.createPool({
   ssl: {
     rejectUnauthorized: false,
   },
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
 });
-
-const ensureParams = (params) => {
-  if (params === undefined || params === null) {
-    throw new Error("SQL parameters are required");
-  }
-
-  const isArray = Array.isArray(params);
-  const isObject = !isArray && typeof params === "object";
-
-  if (!isArray && !isObject) {
-    throw new Error("SQL parameters must be an array or object");
-  }
-};
-
-export const safeExecute = async (sql, params) => {
-  if (typeof sql !== "string" || sql.trim().length === 0) {
-    throw new Error("SQL query must be a non-empty string");
-  }
-
-  ensureParams(params);
-
-  const [result] = await db.execute(sql, params);
-  return result;
-};
-
-
-
-
-
 
 
 
