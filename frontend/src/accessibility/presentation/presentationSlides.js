@@ -4,8 +4,6 @@ export const presentationSlides = [
     id: 1,
     title: "Welcome everyone",
     content: `
-My name is Daniel Lako.
-
  Today I will explain the Question Detail component of our AI-Powered Evangadi Community Forum accessible learning platform.
 
 
@@ -136,7 +134,7 @@ The data is then returned to the frontend, where it is displayed to the user.
   {
     id: 11,
     title: "User Login",
-    content: `
+    content: `I
 The Login feature authenticates users securely.
 
 First, the application validates the user's email and password.
