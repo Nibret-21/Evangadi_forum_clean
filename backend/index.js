@@ -69,6 +69,6 @@ const startServer = async () => {
     process.exit(1);
   }
 };
-
+//starting server
 startServer();
 
