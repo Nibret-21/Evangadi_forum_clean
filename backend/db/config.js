@@ -31,14 +31,10 @@
 // };
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-import path from "path";
 
-dotenv.config({ path: path.resolve("../.env") });
+dotenv.config();
 
-console.log("USER:", process.env.DB_USER);
-console.log("PASS EXISTS:", !!process.env.DB_PASSWORD);
-
-const pool = mysql.createPool({
+export const db = mysql.createPool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
@@ -48,13 +44,13 @@ const pool = mysql.createPool({
     rejectUnauthorized: false,
   },
 });
+
 export const safeExecute = async (query, params = []) => {
   try {
-    const [result] = await pool.query(query, params);
+    const [result] = await db.query(query, params);
     return result;
   } catch (err) {
-    console.error(err);
+    console.error("DB ERROR:", err.message);
     throw err;
   }
 };
-// export default pool;
