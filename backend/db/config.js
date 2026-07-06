@@ -3,16 +3,18 @@ dotenv.config();
 
 import mysql from "mysql2/promise";
 
-// Database connection pool
 export const db = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
+  host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE || "evangadi_forum_db",
-  port: process.env.DB_PORT || 4000,
+  database: process.env.DB_DATABASE,
+  port: Number(process.env.DB_PORT),
   ssl: {
     rejectUnauthorized: false,
   },
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 const ensureParams = (params) => {
@@ -38,8 +40,6 @@ export const safeExecute = async (sql, params) => {
   const [result] = await db.execute(sql, params);
   return result;
 };
-
-
 
 
 
