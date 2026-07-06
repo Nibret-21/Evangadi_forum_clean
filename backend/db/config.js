@@ -4,10 +4,10 @@
 
 // // Database connection pool
 // export const db = mysql.createPool({
-//   host: process.env.DB_HOST || 'localhost',
-//   user: process.env.DB_USER || 'root',
-//   password: process.env.DB_PASS || '',
-//   database: process.env.DB_NAME || 'evangadi_forum',
+//   host: process.env.DB_HOST || "localhost",
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS || "",
+//   database: process.env.DB_NAME || "forum",
 // });
 
 // const ensureParams = params => {
@@ -29,35 +29,24 @@
 //   const [result] = await db.execute(sql, params);
 //   return result;
 // };
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
+import path from "path";
 
-import dotenv from 'dotenv';
-dotenv.config();
-import mysql from 'mysql2/promise';
+dotenv.config({ path: path.resolve("../.env") });
 
-// Database connection pool
-export const db = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
+console.log("USER:", process.env.DB_USER);
+console.log("PASS EXISTS:", !!process.env.DB_PASSWORD);
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS || "",
-  database: process.env.DB_NAME || "forum",
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-const ensureParams = params => {
-  if (params === undefined || params === null) {
-    throw new Error('SQL parameters are required');
-  }
-  const isArray = Array.isArray(params);
-  const isObject = !isArray && typeof params === 'object';
-  if (!isArray && !isObject) {
-    throw new Error('SQL parameters must be an array or object');
-  }
-};
-
-export const safeExecute = async (sql, params) => {
-  if (typeof sql !== 'string' || sql.trim().length === 0) {
-    throw new Error('SQL query must be a non-empty string');
-  }
-  ensureParams(params);
-  const [result] = await db.execute(sql, params);
-  return result;
-};
+export default pool;
