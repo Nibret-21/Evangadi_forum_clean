@@ -199,8 +199,8 @@ export const getQuestionsService = async (filters = {}) => {
   // const rows = unwrapRows(result);
   const result = await safeExecute(listSql, [
     ...params,
-    String(limit),
-    String(offset),
+    Number(limit),
+    Number(offset),
   ]);
   //   const result = await safeExecute(listSql, [
   //   ...params,
