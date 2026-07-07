@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {presentationSlides} from "./presentationSlides";
-import usePresentationKeyboard from "./presentationKeyboard";
+import usePresentationKeyboard from "./presentationkeyboard";
 import {
   readSlide,
   repeatSlide,
