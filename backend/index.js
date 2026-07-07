@@ -8,7 +8,7 @@ import mainRouter from "./src/api/routes.js";
 import {errorHandler} from "./src/middleware/error-handler.js";
 
 const app = express();
-const port = process.env.PORT || 3777;
+const port = process.env.PORT || 4000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,7 +38,13 @@ app.get("/health", (req, res) => {
     timestamp: new Date(),
   });
 });
-
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Evangadi Forum Backend is Running 🚀",
+    version: "1.0.0",
+  });
+});
 // API Routes
 app.use("/api", mainRouter);
 
