@@ -303,12 +303,8 @@ export const getSingleQuestionService = async ({ questionHash }) => {
 
  const answerRows = unwrapRows(answersResult);
 
-  // const answersResult = await safeExecute(answersSql, [q.id, answerLimit]);
-  // const answerRows = unwrapRows(answersResult);
-  const answersResult = await safeExecute(answersSql, [
-    q.id,
-    String(answerLimit),
-  ]);
+
+  const answersResult = await safeExecute(answersSql, [q.id, answerLimit]);
   const answerRows = unwrapRows(answersResult);
 
   // Format question data.
