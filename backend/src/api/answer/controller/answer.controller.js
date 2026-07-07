@@ -1,15 +1,36 @@
 import { StatusCodes } from "http-status-codes";
 import { createAnswerService } from "../service/answer.service.js";
 
+// export const createAnswerController = async (req, res, next) => {
+//   try {
+//     const answer = await createAnswerService({
+//       userId: req.user.id,
+//       questionId: req.body.questionId,
+//       content: req.body.content,
+//     });
+
+//     res.status(StatusCodes.CREATED).json({
+//       success: true,
+//       message: "Answer posted successfully.",
+//       data: answer,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 export const createAnswerController = async (req, res, next) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("USER:", req.user);
+
     const answer = await createAnswerService({
       userId: req.user.id,
       questionId: req.body.questionId,
       content: req.body.content,
     });
 
-    res.status(StatusCodes.CREATED).json({
+    res.status(201).json({
       success: true,
       message: "Answer posted successfully.",
       data: answer,
@@ -18,4 +39,3 @@ export const createAnswerController = async (req, res, next) => {
     next(error);
   }
 };
-
