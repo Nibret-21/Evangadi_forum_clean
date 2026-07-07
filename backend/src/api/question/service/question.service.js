@@ -202,11 +202,7 @@ export const getQuestionsService = async (filters = {}) => {
     Number(limit),
     Number(offset),
   ]);
-  //   const result = await safeExecute(listSql, [
-  //   ...params,
-  //   limit,
-  //   offset
-  // ]);
+ 
   const rows = unwrapRows(result);
 
   // Count total matching questions for the requested filters.
@@ -299,9 +295,9 @@ export const getSingleQuestionService = async ({ questionHash }) => {
   LIMIT ?
 `;
 
- const answersResult = await safeExecute(answersSql, [q.id, answerLimit]);
+//  const answersResult = await safeExecute(answersSql, [q.id, answerLimit]);
 
- const answerRows = unwrapRows(answersResult);
+//  const answerRows = unwrapRows(answersResult);
 
 
   const answersResult = await safeExecute(answersSql, [q.id, answerLimit]);
